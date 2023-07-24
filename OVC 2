@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>OVC Data Collection Form</title>
+  <style>
+    /* Basic styling for the form */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 200px;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>OVC Data Collection Form</h2>
+  <form id="ovcForm">
+    <label>Name:</label>
+    <input type="text" id="name" required>
+
+    <label>Age:</label>
+    <input type="number" id="age" required>
+
+    <label>Date of Birth:</label>
+    <input type="date" id="dateOfBirth" required>
+
+    <label>Sex:</label>
+    <select id="sex" required>
+      <option value="" disabled selected>Select sex</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label>HIV Status:</label>
+    <input type="radio" name="hivStatus" value="Positive" required> Positive
+    <input type="radio" name="hivStatus" value="Negative" required> Negative
+    <input type="radio" name="hivStatus" value="Unknown" required> Unknown
+
+    <label>Eligibility Details:</label>
+    <input type="checkbox" name="vulnerability" value="Orphaned"> Orphaned
+    <input type="checkbox" name="vulnerability" value="Neglected"> Neglected
+    <input type="checkbox" name="vulnerability" value="Abandoned"> Abandoned
+    <!-- Add more vulnerability options as needed -->
+    <br>
+    <label>Disability:</label>
+    <input type="checkbox" name="disability" value="Physical"> Physical
+    <input type="checkbox" name="disability" value="Intellectual"> Intellectual
+    <input type="checkbox" name="disability" value="Sensory"> Sensory
+    <!-- Add more disability options as needed -->
+    <br>
+
+    <label>School Attendance:</label>
+    <input type="radio" name="schoolAttendance" value="Attending"> Attending
+    <input type="radio" name="schoolAttendance" value="Not Attending"> Not Attending
+    <input type="radio" name="schoolAttendance" value="Unknown"> Unknown
+
+    <label>School Performance:</label>
+    <input type="text" id="schoolPerformance">
+
+    <label>Health Conditions:</label>
+    <input type="text" id="healthConditions">
+
+    <label>Other Vulnerabilities:</label>
+    <textarea id="otherVulnerabilities" rows="3"></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // JavaScript code to handle form submission
+    const form = document.getElementById("ovcForm");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Collect form data
+      const data = {
+        name: document.getElementById("name").value,
+        age: document.getElementById("age").value,
+        dateOfBirth: document.getElementById("dateOfBirth").value,
+        sex: document.getElementById("sex").value,
+        hivStatus: document.querySelector('input[name="hivStatus"]:checked').value,
+        vulnerability: Array.from(document.querySelectorAll('input[name="vulnerability"]:checked')).map(input => input.value),
+        disability: Array.from(document.querySelectorAll('input[name="disability"]:checked')).map(input => input.value),
+        schoolAttendance: document.querySelector('input[name="schoolAttendance"]:checked').value,
+        schoolPerformance: document.getElementById("schoolPerformance").value,
+        healthConditions: document.getElementById("healthConditions").value,
+        otherVulnerabilities: document.getElementById("otherVulnerabilities").value,
+      };
+
+      // You can now process the data or send it to the server for further handling
+      console.log(data);
+      // Replace 'console.log(data)' with your data handling logic
+    });
+  </script>
+</body>
+git add .
+git commit -m "Add OVC data collection web page"
+git push origin master
+
+
